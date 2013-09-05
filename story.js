@@ -1,23 +1,38 @@
-function StoryCtrl($scope) {
-  $scope.backlogstories = [
-    {title: "first story", description: "description", points: 4},
-    {title: "second story", description: "description", points: 2}
+var myApp = angular.module("myApp", []);
+
+myApp.factory('Stages', function () {
+  return [
+    {name: "backlog", id: 1},
+    {name: "in progress", id: 2},
+    {name: "done", id: 3},
   ];
-  
-  $scope.inprogressstories = [
-    {title: "first story", description: "description", points: 4},
-    {title: "second story", description: "description", points: 2}
-  ];
-  
-  $scope.donestories = [
-    {title: "first story", description: "description", points: 4},
-    {title: "second story", description: "description", points: 2}
+})
+
+function StoryCtrl($scope, Stages) {
+  $scope.stages = Stages;
+
+  $scope.stories = [
+    {title: "first story", description: "description", points: 4, stage_id: 1},
+    {title: "second story", description: "description", points: 2, stage_id: 1},
+    {title: "story in progress", description: "description", points: 2, stage_id: 2},
+    {title: "story done", description: "description", points: 2, stage_id: 3}
   ];
   
   $scope.addstory = function () {
-    $scope.backlogstories.push({title: $scope.storytitle, description: $scope.storydescription, points: $scope.storypoints});
-    $scope.storytitle = '';
-    $scope.storydescription = '';
-    $scope.storypoints = '';
+    $scope.newstory.stage_id = 1;
+    $scope.stories.push($scope.newstory);
+    $scope.newstory = {}
+  };
+
+  $scope.move = function (story) {
+    story.stage_id++;
+  };
+}
+function StageCtrl($scope, Stages) {
+  $scope.stages = Stages;
+
+  $scope.addStage = function () {
+    $scope.stages.push({name:$scope.stagename, id:$scope.stages.length + 1});
   }
+  
 }

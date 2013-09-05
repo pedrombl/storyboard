@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="myApp">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="story.js"> </script>
@@ -7,29 +7,34 @@
   <body>
     <h2>Story Board</h2>
     <div ng-controller="StoryCtrl">
-      <h3>backlog</h3>
-      <ul>
-        <li ng-repeat="backlogstory in backlogstories">{{backlogstory.title}}({{backlogstory.points}}) - {{backlogstory.description}}</li>
-      </ul>
-      <h3>in progress</h3>
-      <ul>
-        <li ng-repeat="inprogressstory in inprogressstories">{{inprogressstory.title}}({{inprogressstory.points}}) - {{inprogressstory.description}}</li>
-      </ul>
-      <h3>done</h3>
-      <ul>
-            <li ng-repeat="donestory in donestories">{{donestory.title}}({{donestory.points}}) - {{donestory.description}}</li>
-      </ul>
+      <div ng-repeat="stage in stages">
+        <h3>{{stage.name}}</h3>
+        <ul>
+          <li ng-repeat="story in stories | filter:{stage_id:stage.id}">
+            {{story.title}}({{story.points}}) - {{story.description}}
+            <button ng-click="move(story)">move</button>
+          </li>
+        </ul>
+      </div>
       <h2>Create Story</h2>
       <form ng-submit="addstory()">
         <label>title:</label>
-        <input type ="text" ng-model ="storytitle">
+        <input type ="text" ng-model ="newstory.title">
         <label>description:</label>
-        <input type ="text" ng-model ="storydescription">
+        <input type ="text" ng-model ="newstory.description">
         <label>points:</label>
-        <input type ="text" ng-model ="storypoints">
+        <input type ="text" ng-model ="newstory.points">
         <button>add story</button>
       </form>
-        
+  </div>
+
+  <div ng-controller="StageCtrl">
+    <h2>Create Stage</h2>
+    <form ng-submit="addStage()">
+      <label>name:</label>
+      <input type ="text" ng-model ="stagename">
+      <button>add stage</button>
+    </form>
   </div>
   </body>
 </html>
