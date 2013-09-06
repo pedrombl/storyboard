@@ -35,6 +35,15 @@ function StoryCtrl($scope, Stages, $routeParams) {
     {title: "story done", description: "description", points: 2, stage: "done"}
   ];
   
+  $scope.totalPoints = function (stage) {
+    var total = 0;
+    $scope.stories.forEach(function (story) {
+      if(story.stage == stage)
+        total+=story.points;
+    });
+    return total;
+  }
+  
   $scope.addstory = function () {
     $scope.newstory.stage = $scope.stages[0];
     $scope.stories.push($scope.newstory);

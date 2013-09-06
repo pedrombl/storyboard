@@ -2,7 +2,7 @@
   <h1>something</h1>
       <div style="width:100%">
       <div class="col-md-4" ng-repeat="stage in stages">
-        <h3>{{stage}}</h3>
+        <h3>{{stage}} ({{totalPoints(stage)}})</h3>
         <ul>
           <li ng-repeat="story in stories | filter:{stage:stage}">
             {{story.title}}({{story.points}}) - {{story.description}}
