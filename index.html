@@ -1,40 +1,25 @@
 <!doctype html>
-<html ng-app="myApp">
+<html ng-app="ngView">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+       <script src="http://code.angularjs.org/1.0.7/angular.min.js"></script>
     <script src="story.js"> </script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/our.css"></link>
   </head>
   <body>
-    <h2>Story Board</h2>
-    <div ng-controller="StoryCtrl">
-      <div ng-repeat="stage in stages">
-        <h3>{{stage.name}}</h3>
-        <ul>
-          <li ng-repeat="story in stories | filter:{stage_id:stage.id}">
-            {{story.title}}({{story.points}}) - {{story.description}}
-            <button ng-click="move(story)">move</button>
-          </li>
-        </ul>
+    <div ng-controller="MainCntl">
+      Choose:
+      <a href="Story">Stories</a> |
+      <a href="Stage">Stages</a>
+    
+      <div ng-view></div>    
+        <pre>$location.path() = {{$location.path()}}</pre>
+        <pre>$route.current.templateUrl = {{$route.current.templateUrl}}</pre>
+        <pre>$route.current.params = {{$route.current.params}}</pre>
+        <pre>$route.current.scope.name = {{$route.current.scope.name}}</pre>
+        <pre>$routeParams = {{$routeParams}}</pre>
       </div>
-      <h2>Create Story</h2>
-      <form ng-submit="addstory()">
-        <label>title:</label>
-        <input type ="text" ng-model ="newstory.title">
-        <label>description:</label>
-        <input type ="text" ng-model ="newstory.description">
-        <label>points:</label>
-        <input type ="text" ng-model ="newstory.points">
-        <button>add story</button>
-      </form>
-  </div>
 
-  <div ng-controller="StageCtrl">
-    <h2>Create Stage</h2>
-    <form ng-submit="addStage()">
-      <label>name:</label>
-      <input type ="text" ng-model ="stagename">
-      <button>add stage</button>
-    </form>
-  </div>
+    
   </body>
 </html>
