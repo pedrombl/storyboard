@@ -3,18 +3,9 @@ var myApp = angular.module('myApp', []).
     $routeProvider.
       when('/story', {templateUrl: 'story.html', controller: StoryCtrl}).
       when('/stage', {templateUrl: 'stage.html', controller: StageCtrl}).
-      otherwise({redirectTo:'/'});
+      otherwise({redirectTo:'/story'});
   });
  
-function MainCntl($scope, $route, $routeParams, $location) {
-  $scope.$route = $route;
-  $scope.$location = $location;
-  $scope.$routeParams = $routeParams;
-  console.log($route);
-  console.log($location);
-  console.log($routeParams);
-}
-
 myApp.factory('Stages', function () {
   return [
     "backlog",
@@ -23,10 +14,8 @@ myApp.factory('Stages', function () {
   ];
 })
 
-function StoryCtrl($scope, Stages, $routeParams) {
+function StoryCtrl($scope, Stages) {
   $scope.stages = Stages;
-  $scope.params = $routeParams;
-  console.log($routeParams)
 
   $scope.stories = [
     {title: "first story", description: "description", points: 4, stage: "backlog"},
@@ -52,14 +41,11 @@ function StoryCtrl($scope, Stages, $routeParams) {
 
   $scope.move = function (story) {
     var oldIndex = $scope.stages.indexOf(story.stage);
-    console.log(story);
     story.stage = $scope.stages[oldIndex+1];
-    console.log(story);
   };
 }
-function StageCtrl($scope, Stages, $routeParams) {
+function StageCtrl($scope, Stages) {
   $scope.stages = Stages;
-  $scope.params = $routeParams;
 
   $scope.addStage = function () {
     $scope.stages.push($scope.stagename);

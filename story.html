@@ -1,7 +1,6 @@
 <div >
   <h1>something</h1>
-      <div style="width:100%">
-      <div class="col-md-4" ng-repeat="stage in stages">
+      <div ng-repeat="stage in stages">
         <h3>{{stage}} ({{totalPoints(stage)}})</h3>
         <ul>
           <li ng-repeat="story in stories | filter:{stage:stage}">
@@ -9,18 +8,17 @@
             <button ng-click="move(story)" ng-show="stage != stages[stages.length-1]">move</button>
           </li>
         </ul>
-      </div>
     </div>
-      <div style="width:100%">
       <h2>Create Story</h2>
-      <form ng-submit="addstory()">
+      <form name="newStory" ng-submit="addstory()">
         <label>title:</label>
         <input type="text" ng-model="newstory.title">
         <label>description:</label>
         <input type="text" ng-model="newstory.description">
         <label>points:</label>
-        <input type="text" ng-model="newstory.points">
-        <button>add story</button>
+        <input type="number" name="points" ng-model="newstory.points">
+        <span class="error" ng-show="newStory.points.$error.number">
+                Not valid number!</span>
+        <button ng-disabled="newStory.points.$error.number">add story</button>
       </form>
-    </div>
   </div>
