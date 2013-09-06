@@ -53,7 +53,7 @@ function StageCtrl($scope, Stages, $routeParams) {
   $scope.params = $routeParams;
 
   $scope.addStage = function () {
-    $scope.stages.push({name:$scope.stagename, id:$scope.stages.length + 1});
+    $scope.stages.push($scope.stagename);
   }
 
   $scope.up = function(index)
