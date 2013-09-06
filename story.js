@@ -1,16 +1,10 @@
-var myApp = angular.module('ngView', [], function($routeProvider, $locationProvider) {
-  $routeProvider.when('/Story', {
-    templateUrl: 'story.html',
-    controller: StoryCtrl
+var myApp = angular.module('myApp', []).
+  config(function($routeProvider) {
+    $routeProvider.
+      when('/story', {templateUrl: 'story.html', controller: StoryCtrl}).
+      when('/stage', {templateUrl: 'stage.html', controller: StageCtrl}).
+      otherwise({redirectTo:'/'});
   });
-  $routeProvider.when('/Stage', {
-    templateUrl: 'stage.html',
-    controller: StageCtrl
-  });
- 
-  // configure html5 to get links working on jsfiddle
-  $locationProvider.html5Mode(false);
-});
  
 function MainCntl($scope, $route, $routeParams, $location) {
   $scope.$route = $route;
