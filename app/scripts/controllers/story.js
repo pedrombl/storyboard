@@ -1,14 +1,9 @@
 'use strict';
 
-angular.module('storyboardApp').controller('StoryCtrl', function ($scope, Stages) {
+angular.module('storyboardApp').controller('StoryCtrl', function ($scope, Stages, storyService) {
   $scope.stages = Stages;
 
-  $scope.stories = [
-    {title: "first story", description: "description", points: 4, stage: "backlog"},
-    {title: "second story", description: "description", points: 2, stage: "backlog"},
-    {title: "story in progress", description: "description", points: 2, stage: "in progress"},
-    {title: "story done", description: "description", points: 2, stage: "done"}
-  ];
+  $scope.stories = storyService.stories();
   
   $scope.totalPoints = function (stage) {
     var total = 0;
@@ -19,9 +14,9 @@ angular.module('storyboardApp').controller('StoryCtrl', function ($scope, Stages
     return total;
   }
   
-  $scope.addstory = function () {
+  $scope.addStory = function () {
     $scope.newstory.stage = $scope.stages[0];
-    $scope.stories.push($scope.newstory);
+    storyService.addStory($scope.newstory);
     $scope.newstory = {}
   };
 

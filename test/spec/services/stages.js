@@ -11,8 +11,4 @@ describe('Service: stages', function () {
     stages = _stages_;
   }));
 
-  it('should do something', function () {
-    expect(!!stages).toBe(true);
-  });
-
 });

@@ -6,17 +6,42 @@ describe('Controller: StoryCtrl', function () {
   beforeEach(module('storyboardApp'));
 
   var StoryCtrl,
-    scope;
+    scope,
+    Stages,
+    storyService;
+    
+  var stories = [
+    {title: "first story", description: "description", points: 4, stage: "backlog"},
+    {title: "second story", description: "description", points: 2, stage: "backlog"},
+    {title: "story in progress", description: "description", points: 2, stage: "in progress"},
+    {title: "story done", description: "description", points: 2, stage: "done"}];
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, _storyService_) {
     scope = $rootScope.$new();
+    Stages = ["backlog"];
+    
+    storyService = _storyService_;
+    spyOn(storyService, 'stories').andReturn(stories);
+    spyOn(storyService, 'addStory');
+    
     StoryCtrl = $controller('StoryCtrl', {
-      $scope: scope
+      $scope: scope,
+      Stages: Stages,
+      storyService: storyService
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should calculate total points for a stage', function () {
+    expect(scope.totalPoints("backlog")).toBe(6);
   });
+  
+  it('should add story in storyboard', function(){
+    expect(scope.stories.length).toBe(4);
+    scope.newstory={title: "New story", description: "description", points: 4};
+    scope.addStory();
+    expect(storyService.addStory).toHaveBeenCalledWith({title: "New story", description: "description", points: 4, stage: "backlog"});
+  })
+  
+  
 });
