@@ -1,0 +1,17 @@
+<div >
+  <h2>Create Stage</h2>
+  <form ng-submit="addStage()">
+    <label>name:</label>
+    <input type ="text" ng-model ="stagename">
+    <button>add stage</button>
+  </form>
+  <div>
+    <ul ui-sortable ng-model="stages">
+      <li ng-repeat="stage in stages">
+      {{stage}}
+      <button ng-click="up($index)" ng-show="!$first">up</button>
+      <button ng-click="down($index)" ng-show="!$last">down</button>
+      </li>
+    </ul>
+  </div>
+</div>
