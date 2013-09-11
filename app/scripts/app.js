@@ -3,11 +3,11 @@
 angular.module('storyboardApp', [])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/main', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/story', {
+      .when('/', {
         templateUrl: 'views/story.html',
         controller: 'StoryCtrl'
       })

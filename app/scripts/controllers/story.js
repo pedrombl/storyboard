@@ -25,4 +25,8 @@ angular.module('storyboardApp').controller('StoryCtrl', function ($scope, Stages
     story.stage = $scope.stages[oldIndex+1];
   };
 
+  $scope.bootstrapCol = function () {
+    return Math.floor(12/$scope.stages.length);
+  }
+
 });
