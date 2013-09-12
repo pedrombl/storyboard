@@ -11,7 +11,7 @@ angular.module('storyboardApp')
       var story = {
         title:newStory.title,
         description:newStory.description,
-        points:newStory.points,
+        points:parseInt(newStory.points),
         stage:newStory.stage
       };
       stories.push(story);
