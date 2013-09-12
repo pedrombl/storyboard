@@ -18,15 +18,12 @@ angular.module('storyboardApp').controller('StoryCtrl', function ($scope, Stages
     $scope.newstory.stage = $scope.stages[0];
     storyService.addStory($scope.newstory);
     $scope.newstory = {}
+    
   };
 
   $scope.move = function (story) {
     var oldIndex = $scope.stages.indexOf(story.stage);
     story.stage = $scope.stages[oldIndex+1];
   };
-
-  $scope.bootstrapCol = function () {
-    return Math.floor(12/$scope.stages.length);
-  }
 
 });

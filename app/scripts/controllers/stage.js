@@ -5,6 +5,7 @@ angular.module('storyboardApp').controller('StageCtrl', function ($scope, Stages
 
   $scope.addStage = function () {
     $scope.stages.push($scope.stagename);
+    $scope.stagename = "";
   }
 
   $scope.up = function(index)  { 

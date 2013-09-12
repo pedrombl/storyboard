@@ -12,13 +12,13 @@
   </div>
   </div>
   <h2>Create Story</h2>
-  <form name="newStory" ng-submit="addStory()">
+  <form name="storyForm" ng-submit="addStory()" novalidate>
     <label>title:</label>
     <input type="text" ng-model="newstory.title">
     <label>description:</label>
     <input type="text" ng-model="newstory.description">
     <label>points:</label>
-    <input type="number" name="points" ng-model="newstory.points">
+    <input name="pointsField" ng-model="newstory.points" ng-pattern="/[0-9]+/">
     <button>add story</button>
   </form>
 </div>

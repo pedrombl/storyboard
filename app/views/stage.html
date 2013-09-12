@@ -1,9 +1,11 @@
 <div >
   <h2>Stages</h2>
-  <form ng-submit="addStage()">
+  <form name="addStageForm" ng-submit="addStage()" novalidate>
     <label>name:</label>
-    <input type ="text" ng-model ="stagename">
-    <button>add stage</button>
+    <input type ="text" name="stageName" ng-model="stagename" ng-unique="stages">
+    <button ng-disabled="addStageForm.stageName.$invalid">add stage</button>
+    <p ng-show="addStageForm.stageName.$invalid">stage already exists</p>
+    
   </form>
   <div>
     <ul ui-sortable ng-model="stages">
